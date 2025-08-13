@@ -1,0 +1,31 @@
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    environment:
+      TZ: Asia/Tokyo
+      STAGE: ${STAGE:-dev} # .env の STAGE を Dockerfile に渡す
+    ports:
+      - '3000:3000'
+    # depends_on:
+    #   - db
+    #   - api
+    env_file:
+      - .env
+    volumes:
+      - ./web:/app # webをまるごとマウント
+    networks:
+      - container_net
+    command: /bin/sh -c "if [ \"$STAGE\" = 'prod' ]; then npm run build && npm start; else npm run dev; fi"
+    restart: always
+    tty: true
+    stdin_open: true
+
+volumes:
+  node_modules:
+  db-data:
+
+networks:
+  container_net:
+    driver: bridge
