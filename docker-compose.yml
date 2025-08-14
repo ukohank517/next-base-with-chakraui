@@ -15,19 +15,6 @@ services:
     networks:
       - container_net
 
-  flyway:
-    build: ./flyway
-    container_name: flyway
-    depends_on:
-      - db
-    volumes:
-      - ./flyway/sql:/flyway/sql
-    env_file:
-      - .env
-    networks:
-      - container_net
-    entrypoint: ["/flyway/entrypoint.sh"]
-
   web:
     build:
       context: ./web
