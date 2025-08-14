@@ -31,6 +31,7 @@ services:
       - .env
     volumes:
       - ./web:/app # webをまるごとマウント
+      - ./.env:/app/.env:ro  # これでコンテナ内 /app/.env として読み込まれる
     networks:
       - container_net
     command: /bin/sh -c "if [ \"$STAGE\" = 'prod' ]; then npm run build && npm start; else npm run dev; fi"

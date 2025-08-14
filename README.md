@@ -41,3 +41,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 docker-compose exec db bash
 
 docker-compose logs -f  --timestamps flyway
+
+## prismaコマンド(docker-compose exec web ${prisma command}):
+
+1. npx prisma db pushで反映させる。migrationファイルは作られない
+
+2. 動作確認して問題なければ、npx prisma migrate resetが必要
+
+3. npx prisma migrate devでprisma/migrationファイルを生成
+
+4. 本番ではprisma/migrationテーブルを取得し、npx prisma migrate deployで反映する
