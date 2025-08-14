@@ -1,4 +1,33 @@
 services:
+  db:
+    platform: linux/amd64 # for M1?
+    build: db
+    container_name: ${MYSQL_HOST}
+    ports:
+      - '3306:3306'
+    env_file:
+      - '.env'
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - ./db-data:/var/lib/mysql
+    command: mysqld
+    networks:
+      - container_net
+
+  flyway:
+    build: ./flyway
+    container_name: flyway
+    depends_on:
+      - db
+    volumes:
+      - ./flyway/sql:/flyway/sql
+    env_file:
+      - .env
+    networks:
+      - container_net
+    entrypoint: ["/flyway/entrypoint.sh"]
+
   web:
     build:
       context: ./web

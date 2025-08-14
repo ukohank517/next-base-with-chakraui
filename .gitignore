@@ -38,3 +38,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 /web/next-env.d.ts
+
+# don't backup db data
+db-data
