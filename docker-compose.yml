@@ -34,7 +34,7 @@ services:
       - ./.env:/app/.env:ro  # これでコンテナ内 /app/.env として読み込まれる
     networks:
       - container_net
-    command: /bin/sh -c "if [ \"$STAGE\" = 'prod' ]; then npm run build && npm start; else npm run dev; fi"
+    command: /bin/sh -c "if [ \"$STAGE\" = 'prod' ]; then npm run build && npm start; else npm install && npm run dev; fi"
     restart: always
     tty: true
     stdin_open: true
