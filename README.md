@@ -44,10 +44,16 @@ docker-compose logs -f  --timestamps flyway
 
 ## prismaコマンド(docker-compose exec web ${prisma command}):
 
-1. npx prisma db pushで反映させる。migrationファイルは作られない
+前提: dockerの中で操作すること(docker-compose exec web)
 
-2. 動作確認して問題なければ、npx prisma migrate resetが必要
+### 開発環境でやること
+0. `schema.prisma` ファイルでモデル定義を修正
 
-3. npx prisma migrate devでprisma/migrationファイルを生成
+1. `npx prisma db push`: schema.prismaの内容はdbに反映させる。しかしmigrationファイルは作られない
 
-4. 本番ではprisma/migrationテーブルを取得し、npx prisma migrate deployで反映する
+2. `npx prisma migrate reset`: 開発環境で動作確認して問題なければ、このコマンドでdb修正を解除する
+
+3. `npx prisma migrate dev`: 上記確認して問題ない内容をprisma/migrationファイルで更新sqlを生成する
+
+### 本番環境でやること
+4. `npx prisma migrate deploy`: prisma/migrationファイルの中身を確認し、本番データベースのマイグレーションを実施する
