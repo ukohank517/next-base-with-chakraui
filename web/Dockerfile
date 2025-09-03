@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # STAGE を引数として受け取り、インストール方法を切り替え。デフォルトではdevで、composeから起動する際はcomposeから指定された値を使用
+# prismaは、サービスが初回起動時に一度だけ実行される。その後の更新は毎回手動でgenerateする必要がある。
 ARG STAGE=dev
 RUN if [ "$STAGE" = "prod" ]; then \
-      npm ci --only=production; \
+      npm ci --only=production & npx prisma generate; \
     else \
       npm install; \
     fi
-
 
 # 以降のファイルは docker-compose でボリュームマウントするのでここではコピーしない
 

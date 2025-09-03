@@ -40,4 +40,4 @@ yarn-error.log*
 /web/next-env.d.ts
 
 # don't backup db data
-db-data
+db/db-data

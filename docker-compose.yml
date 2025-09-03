@@ -10,7 +10,7 @@ services:
     environment:
       TZ: Asia/Tokyo
     volumes:
-      - ./db-data:/var/lib/mysql
+      - ./db/db-data:/var/lib/mysql
     command: mysqld
     networks:
       - container_net
