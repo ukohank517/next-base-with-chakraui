@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Provider } from '@/components/ui/provider';
+import { Provider } from '../components/ui/provider';
+// import { Provider } from '@/components/ui/provider';
 
 export const metadata: Metadata = {
   title: "Create Next App",

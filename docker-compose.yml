@@ -15,7 +15,7 @@ services:
     networks:
       - container_net
 
-  web:
+  user-web:
     build:
       context: ./web
       dockerfile: Dockerfile
